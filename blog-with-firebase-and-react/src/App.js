@@ -1,8 +1,28 @@
 import './App.css';
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import Home from './compornents/Home';
+import CreatePost from './compornents/CreatePost';
+import Login from './compornents/Login';
+import Logout from './compornents/Logout';
+import Navbar from './compornents/Navbar';
+import { useState } from 'react';
 
 function App() {
+
+  const [isAuth, setIsAuth] = useState(false);
+
+
+
   return (
-    <div></div>
+    <Router>
+      <Navbar isAuth={isAuth}/>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/createpost" element={<CreatePost />}></Route>
+        <Route path="/login" element={<Login isAuth={isAuth} setIsAuth={setIsAuth}/>}></Route>
+        <Route path="/logout" element={<Logout isAuth={isAuth} setIsAuth={setIsAuth}/>}></Route>
+      </Routes>
+    </Router>
   );
 }
 
